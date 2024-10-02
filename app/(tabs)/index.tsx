@@ -5,7 +5,7 @@ import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-import {data} from '@/constants/Data';
+import { data } from '@/constants/Data';
 
 
 export default function HomeScreen() {
@@ -24,13 +24,13 @@ export default function HomeScreen() {
       </ThemedView>
 
       {
-        data.map((_, i)=>{
-          return <ThemedView key={i} style={styles.stepContainer}>
+        data.map((_, i) => {
+          return <ThemedView className="bg-gray-100" key={i} style={styles.stepContainer}>
             <ThemedText type="subtitle">{_.title}</ThemedText>
             <ThemedText>
               <ThemedText type="defaultSemiBold">{_.month} {_.date} || </ThemedText>
               {_.dailyLaw}
-              <Link href="/explore">visit</Link>
+              <Link href="/explore" className="bg-gray-400 font-bold">visit</Link>
             </ThemedText>
           </ThemedView>
         })
