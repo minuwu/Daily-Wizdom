@@ -25,13 +25,17 @@ export default function HomeScreen() {
 
       {
         data.map((_, i) => {
-          return <ThemedView className="bg-gray-100" key={i} style={styles.stepContainer}>
-            <ThemedText type="subtitle">{_.title}</ThemedText>
-            <ThemedText>
-              <ThemedText type="defaultSemiBold">{_.month} {_.date} || </ThemedText>
-              {_.dailyLaw}
-              <Link href="/explore" className="bg-gray-400 font-bold">visit</Link>
-            </ThemedText>
+          return <ThemedView className="h-50 active:bg-gray-500 bg-gray-100 dark:bg-gray-700 dark:text-white-100 rounded px-1 py-1 h-24 -mx-4" key={i} >
+            
+            <ThemedView className="flex-row w-100 h-full">
+              <ThemedView className="flex-col bg-red-100 w-[20%] rounded shadow-xl border-black-500 shadow-inner justify-center align-center">
+                <ThemedText className="text-center font-bold text-xl dark:text-red-600">{_.date}</ThemedText>
+                <ThemedText className="text-center dark:text-red-600">{_.month.trim().slice(0,3)}</ThemedText>
+              </ThemedView>
+              <ThemedView className='flex-1 justify-center align-center'>
+                <ThemedText type="subtitle" className="px-2 italic uppercase text-balance pl-3">{_.title}</ThemedText>
+              </ThemedView>
+            </ThemedView>
           </ThemedView>
         })
       }
