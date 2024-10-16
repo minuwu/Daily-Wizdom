@@ -3,6 +3,7 @@ import { Text, View, Button, Platform } from 'react-native';
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 import Constants from 'expo-constants';
+import useQuote, { Wizdom } from '@/hooks/useQuote';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -61,24 +62,34 @@ export default function App() {
         <Text>Body: {notification && notification.request.content.body}</Text>
         <Text>Data: {notification && JSON.stringify(notification.request.content.data)}</Text>
       </View>
-      <Button
-        title="Press to schedule a notification"
-        onPress={async () => {
-          await schedulePushNotification();
-        }}
-      />
+      <View style ={{ alignItems: 'center', justifyContent: 'center'}}>
+          <Button
+            title="Press to schedule a notification 2sec"
+            onPress={async () => {
+              await schedulePushNotification(2);
+            }}
+          />
+          <Button
+            title="Press to schedule a notification 4sec"
+            onPress={async () => {
+              await schedulePushNotification(4);
+              await schedulePushNotification(6);
+              await schedulePushNotification(41);
+            }}
+          />
+      </View>
     </View>
   );
 }
 
-async function schedulePushNotification() {
+export async function schedulePushNotification(secondss: number, wizdom?:Wizdom ) {
   await Notifications.scheduleNotificationAsync({
     content: {
-      title: "You've got mail! 📬",
-      body: 'Here is the notification body',
+      title: wizdom?wizdom.title: "You've got mail! 📬",
+      body: wizdom?wizdom.dailyLaw : 'Here is the notification body',
       data: { data: 'goes here', test: { test1: 'more data' } },
     },
-    trigger: { seconds: 2 },
+    trigger: { seconds: secondss },
   });
 }
 
