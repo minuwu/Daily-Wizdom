@@ -9,7 +9,7 @@ export const data = [
       },
       "story": "You possess a kind of inner force that seeks to guide you toward your Life's Task- what you are meant to accomplish in the time that you have to live. In childhood this force was clear to you. It directed you toward activities and subjects that fit your natural inclinations, that sparked a curiosity that was deep and primal. In the intervening years, the force tends to fade in and out as you listen more to parents and peers, to the daily anxieties that wear away at you. This can be the source of your unhappinessyour lack of connection to who you are and what makes you unique. The first move toward mastery is always inward-learning who you really are and reconnecting with that innate force. Knowing it with clarity, you will find your way to the proper career path and everything else will fall into place. It is never too late to start this process.",
       "dailyLaw": "Mastery is a process and discovering your calling is the starting point.",
-      "source": "Mastery, I: Discover Your CallingThe Lifc's Task"
+      "source": "Mastery, I: Discover Your CallingThe Life's Task"
     },
     {
       "month": "JANUARY",
@@ -55,7 +55,7 @@ export const data = [
         "body": "",
         "name": ""
       },
-      "story": "The contemporary anthropologist-linguist Daniel Everett grew up on the California-Mexico border, in a cowboy town. From a very carly age, he found himself dravwn to the Mexican culture around him. Everything about it fascinated himthe sound of the words spoken by the migrant workers, the food, the manners that were so different from the Anglo world. He immersed himself as much as he could in their language and culture. This would transform into a lifelong interest in the Other-the diversity of cultures on the planet and what that means about our evolution.",
+      "story": "The contemporary anthropologist-linguist Daniel Everett grew up on the California-Mexico border, in a cowboy town. From a very early age, he found himself drawn to the Mexican culture around him. Everything about it fascinated himthe sound of the words spoken by the migrant workers, the food, the manners that were so different from the Anglo world. He immersed himself as much as he could in their language and culture. This would transform into a lifelong interest in the Other-the diversity of cultures on the planet and what that means about our evolution.",
       "dailyLaw": "What's something you've always felt a pull toward? Dive deep into it today.",
       "source": "Mastery, I: Discover Your Calling The Life's Task"
     },

@@ -1,91 +1,55 @@
-import { Image, StyleSheet, Platform } from 'react-native';
-import { Link } from 'expo-router';
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-import { data } from '@/constants/Data';
+import { ThemedText } from '@/components/ThemedText';
+import  useQuote  from '@/hooks/useQuote';
+import { SafeAreaView, ScrollView } from 'react-native';
+import { useLocalSearchParams } from 'expo-router';
+import { schedulePushNotification } from '../reminder';
 
+export default function Home(){
+  let month: string; let day: number; let date : Date = new Date();
+  let params = useLocalSearchParams();
+  if( Object.keys(params).length != 0){
+    let { incomingMonth,incomingDate }= params;
+    month = Array.isArray(incomingMonth) ? incomingMonth[0]:incomingMonth;
+    day = parseInt(Array.isArray(incomingDate) ? incomingDate[0]: incomingDate); 
+  }else{
+    date.setMonth(0);
+    date.setDate(5);
+    month = date.toLocaleString('en-US',{month: 'long'}).toUpperCase();
+    day = (date.getDate());
+  }
+  
+  console.log(day, month);
+  let wizdom = [];
+  wizdom.push(useQuote( false, day, month ));
 
-export default function HomeScreen() {
-  return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
+  return <SafeAreaView className="justify-center items-center">
+      <ThemedView className="p-4 rounded text-center shadow-lg shadow-cyan-500/50">
+        <ThemedView className="mt-8 text-center">
+          <ThemedText type='default' className="text-center">
+            {date.toLocaleDateString('en-US',{ month: 'long', day: 'numeric', year:'numeric', hour: '2-digit', minute:'2-digit', second: '2-digit' })}
+          </ThemedText> 
+        </ThemedView>
+        <ThemedView>      
+          <ThemedText type='subtitle' className="text-center italic my-2">{wizdom[0].title}</ThemedText>
+        </ThemedView>
+        {wizdom[0].quote.body.trim() && 
+        <ThemedView>      
+          <ThemedText type='default' className="my-1 italic text-sm text-center text-gray-500">{wizdom[0].quote.body} - "{wizdom[0].quote.name}"</ThemedText>
+        </ThemedView>
+        }
+        <ScrollView className="flex-1 bg-gray-200 dark:bg-gray-900 rounded-md">  
+          <ThemedView className="bg-gray-200 dark:bg-gray-900 h-full justify-center content-center my-auto mx-2 mt-4 rounded-md">
+            <ThemedText type='default' className="bg-inherit min-h-full m-2 my-auto text-sm text-justify break-words text-wrap text-pretty">{wizdom[0].story}</ThemedText>
+          </ThemedView>    
+        </ScrollView>
+        <ThemedView>      
+          <ThemedText type='defaultSemiBold' className="text text-center bold mt-2 text-balance">Daily Law: {wizdom[0].dailyLaw}</ThemedText>
+        </ThemedView>
+        <ThemedView>      
+          <ThemedText type='default' className="text-sm text-center italic text-xs">{wizdom[0].source}</ThemedText>
+        </ThemedView>
       </ThemedView>
-
-      {
-        data.map((_, i) => {
-          return <ThemedView className="h-50 active:bg-gray-500 bg-gray-100 dark:bg-gray-700 dark:text-white-100 rounded px-1 py-1 h-24 -mx-4" key={i} >
-            
-            <ThemedView className="flex-row w-100 h-full">
-              <ThemedView className="flex-col bg-red-100 w-[20%] rounded shadow-xl border-black-500 shadow-inner justify-center align-center">
-                <ThemedText className="text-center font-bold text-xl dark:text-red-600">{_.date}</ThemedText>
-                <ThemedText className="text-center dark:text-red-600">{_.month.trim().slice(0,3)}</ThemedText>
-              </ThemedView>
-              <ThemedView className='flex-1 justify-center align-center'>
-                <ThemedText type="subtitle" className="px-2 italic uppercase text-balance pl-3">{_.title}</ThemedText>
-              </ThemedView>
-            </ThemedView>
-          </ThemedView>
-        })
-      }
-
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({ ios: 'cmd + d', android: 'cmd + m' })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
-  );
+  </SafeAreaView>
 }
-
-const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
-});
