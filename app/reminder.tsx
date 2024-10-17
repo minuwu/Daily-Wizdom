@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Text, View, Button, Platform } from 'react-native';
+import { Text, View, Button, Platform, Switch } from 'react-native';
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 import Constants from 'expo-constants';
@@ -21,6 +21,53 @@ export default function App() {
   );
   const notificationListener = useRef<Notifications.Subscription>();
   const responseListener = useRef<Notifications.Subscription>();
+
+  const [dailyQuoteEnabled, setDailyQuoteEnabled] = useState(true);
+  const [randomQuoteEnabled, setRandomQuoteEnabled] = useState(true);
+
+  const scheduleDailyQuote = async () => {
+    if (dailyQuoteEnabled){
+      const trigger = new Date();
+      trigger.setHours( 9, 0, 0);
+      let quote = useQuote(true);
+      await Notifications.scheduleNotificationAsync({
+        content: {
+          title: quote.title,
+          body: quote.dailyLaw
+        },
+        trigger
+      });
+    }else {
+      Notifications.cancelAllScheduledNotificationsAsync();
+    }
+  }
+  const scheduleRandomQuote =  async () =>{
+    if (randomQuoteEnabled){
+      const triggerTimes = [Math.random(), Math.random(), Math.random()]. map((value)=>
+        new Date(Date.now() + value * (1000 * 60 * 60 * 24))
+      );
+
+      for( let time of triggerTimes){
+        let quote = useQuote(true);
+        await Notifications.scheduleNotificationAsync({
+          content:{
+            title: quote.title,
+            body: quote.dailyLaw,
+          },
+          trigger: time,
+        });
+      }
+    } else{
+      await Notifications.cancelAllScheduledNotificationsAsync();
+    }
+  };
+  useEffect(()=> {
+    scheduleDailyQuote();
+  }, [dailyQuoteEnabled]);
+
+  useEffect(()=> {
+    scheduleRandomQuote();
+  }, [randomQuoteEnabled]);
 
   useEffect(() => {
     registerForPushNotificationsAsync().then(token => token && setExpoPushToken(token));
@@ -51,32 +98,14 @@ export default function App() {
         alignItems: 'center',
         justifyContent: 'space-around',
       }}>
-      <Text>Your expo push token: {expoPushToken}</Text>
-      <Text>{`Channels: ${JSON.stringify(
-        channels.map(c => c.id),
-        null,
-        2
-      )}`}</Text>
-      <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Title: {notification && notification.request.content.title} </Text>
-        <Text>Body: {notification && notification.request.content.body}</Text>
-        <Text>Data: {notification && JSON.stringify(notification.request.content.data)}</Text>
-      </View>
-      <View style ={{ alignItems: 'center', justifyContent: 'center'}}>
-          <Button
-            title="Press to schedule a notification 2sec"
-            onPress={async () => {
-              await schedulePushNotification(2);
-            }}
-          />
-          <Button
-            title="Press to schedule a notification 4sec"
-            onPress={async () => {
-              await schedulePushNotification(4);
-              await schedulePushNotification(6);
-              await schedulePushNotification(41);
-            }}
-          />
+      <View style ={{ flex:1, flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
+         
+       <Text> Daily Quote </Text>
+       <Switch value={dailyQuoteEnabled} onValueChange={setDailyQuoteEnabled} />
+       
+       <Text> Random Quote </Text>
+       <Switch value={randomQuoteEnabled} onValueChange={setRandomQuoteEnabled} />
+
       </View>
     </View>
   );

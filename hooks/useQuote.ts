@@ -12,11 +12,14 @@ export interface Wizdom {
     "dailyLaw": string,
     "source": string
 };
+export const monthIdx = [
+    "JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"
+];
 
 export default function useQuote( random?: boolean, day?: number, month?: string ): Wizdom {
     if(random){
-        let randomNumber = () : number => { return Math.floor(Math.random()*366+1) };
-        let randomIndex: number = (randomNumber() + randomNumber()  * randomNumber()) % 9 + 1 ;
+        let randomNumber = () : number => { return Math.floor(Math.random()*366) };
+        let randomIndex: number = (randomNumber() + randomNumber()  * randomNumber()) % 9 ;
         console.log(randomIndex);
         return data[randomIndex];
     }else{
