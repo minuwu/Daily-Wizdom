@@ -5,7 +5,7 @@ import  useQuote, {monthIdx}  from '@/hooks/useQuote';
 import { SafeAreaView, ScrollView } from 'react-native';
 import { useLocalSearchParams } from 'expo-router';
 
-export default function Home(){
+export default function selectedWizdom(){
   let month: string; let day: number; let date : Date = new Date();
   let params = useLocalSearchParams();
   if( Object.keys(params).length != 0){
@@ -24,7 +24,7 @@ export default function Home(){
       <ThemedView className="p-4 rounded text-center shadow-lg shadow-cyan-500/50">
         <ThemedView className="mt-8 text-center">
           <ThemedText type='default' className="text-center">
-            {date.toLocaleDateString('en-US',{ month: 'long', day: 'numeric', year:'numeric', hour: '2-digit', minute:'2-digit', second: '2-digit' })}
+            {wizdom[0].month+" "+wizdom[0].date}  
           </ThemedText> 
         </ThemedView>
         <ThemedView>      
