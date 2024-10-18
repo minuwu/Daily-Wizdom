@@ -19,12 +19,12 @@
       "package": "com.minuwu.dailywizdom",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      },
-      "notification": {
-        "icon": "./assets/images/adaptive-icon.png",
-        "color": "#0504AA"
+        "backgroundColor": "#0504aa"
       }
+    },
+    "notification": {
+      "icon": "./assets/images/notification-icon.png",
+      "color": "#0504aa"
     },
     "web": {
       "bundler": "metro",
