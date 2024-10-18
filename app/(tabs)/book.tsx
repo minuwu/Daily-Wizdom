@@ -11,7 +11,7 @@ import { Wizdom } from '@/hooks/useQuote';
 import { memo } from 'react';
 import { Block } from '@/components/Block';
 
-const ITEM_HEIGHT = 50;
+const ITEM_HEIGHT = 92;
 
 const getDayOfYear = (): number => {
   const today = new Date();
@@ -59,22 +59,3 @@ export default function TabOneScreen() {
     // </ParallaxScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
-});
