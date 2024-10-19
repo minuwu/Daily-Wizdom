@@ -3,7 +3,6 @@ import  useQuote, {monthIdx}  from '@/hooks/useQuote';
 import { useLocalSearchParams } from 'expo-router';
 import BlockView from '@/components/BlockView';
 
-
 export default function Home(){
   let month: string; let day: number; let date : Date = new Date();
   let params = useLocalSearchParams();

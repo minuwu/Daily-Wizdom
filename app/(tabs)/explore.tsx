@@ -37,6 +37,7 @@ export default function TabTwoScreen() {
         <ThemedText type="default" className="text-xl bold mt-2">Change Theme</ThemedText>
         <ThemedView className="flex flex-row justify-between my-4 h-8">
           <Pressable className="w-[30%] bg-slate-200 rounded-md border border-lg flex-col justify-center items-center dark:bg-gray-800 shadow-md shadow-black dark:shadow-white" onPress={()=>{setTheme('light')}}>
+
             <ThemedText>
               <Ionicons name={theme=="light"? "sunny" : "sunny-outline"} className="px-4"/>
               LIGHT
@@ -53,11 +54,8 @@ export default function TabTwoScreen() {
               <Ionicons name={theme=="dark"? "moon" : "moon-outline"} style={{marginLeft: 4}}/>
             </ThemedText>
           </Pressable>
-          
-
          </ThemedView>
       </ThemedView>
-      
     </ParallaxScrollView>
   );
 }

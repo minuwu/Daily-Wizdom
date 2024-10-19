@@ -5,6 +5,7 @@ import * as Notifications from 'expo-notifications';
 import Constants from 'expo-constants';
 import useQuote, { Wizdom } from '@/hooks/useQuote';
 
+
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
@@ -98,7 +99,25 @@ export default function App() {
         alignItems: 'center',
         justifyContent: 'space-around',
       }}>
-      <View style ={{ flex:1, flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
+      
+      <Text>Your expo push token: {expoPushToken}</Text>
+      <Text>{`Channels: ${JSON.stringify(
+        channels.map(c => c.id),
+        null,
+        2
+      )}`}</Text>
+      <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Title: {notification && notification.request.content.title} </Text>
+        <Text>Body: {notification && notification.request.content.body}</Text>
+        <Text>Data: {notification && JSON.stringify(notification.request.content.data)}</Text>
+      </View>
+      <Button
+        title="Press to schedule a notification"
+        onPress={async () => {
+          await schedulePushNotification();
+        }}
+      />
+        <View style ={{ flex:1, flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
          
        <Text> Daily Quote </Text>
        <Switch value={dailyQuoteEnabled} onValueChange={setDailyQuoteEnabled} />
@@ -119,6 +138,7 @@ export async function schedulePushNotification(secondss: number, wizdom?:Wizdom 
       data: { data: 'goes here', test: { test1: 'more data' } },
     },
     trigger: { seconds: secondss },
+
   });
 }
 
