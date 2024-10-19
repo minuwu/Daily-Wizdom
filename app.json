@@ -9,17 +9,22 @@
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "resizeMode": "cover",
+      "backgroundColor": "#0504aa"
     },
     "ios": {
       "supportsTablet": true
     },
     "android": {
+      "package": "com.minuwu.dailywizdom",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#0504aa"
       }
+    },
+    "notification": {
+      "icon": "./assets/images/notification-icon.png",
+      "color": "#0504aa"
     },
     "web": {
       "bundler": "metro",

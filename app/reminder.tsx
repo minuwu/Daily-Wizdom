@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
-import { Text, View, Button, Platform } from 'react-native';
+import { Text, View, Button, Platform, Switch } from 'react-native';
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 import Constants from 'expo-constants';
+import useQuote, { Wizdom } from '@/hooks/useQuote';
+
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -20,6 +22,53 @@ export default function App() {
   );
   const notificationListener = useRef<Notifications.Subscription>();
   const responseListener = useRef<Notifications.Subscription>();
+
+  const [dailyQuoteEnabled, setDailyQuoteEnabled] = useState(true);
+  const [randomQuoteEnabled, setRandomQuoteEnabled] = useState(true);
+
+  const scheduleDailyQuote = async () => {
+    if (dailyQuoteEnabled){
+      const trigger = new Date();
+      trigger.setHours( 9, 0, 0);
+      let quote = useQuote(true);
+      await Notifications.scheduleNotificationAsync({
+        content: {
+          title: quote.title,
+          body: quote.dailyLaw
+        },
+        trigger
+      });
+    }else {
+      Notifications.cancelAllScheduledNotificationsAsync();
+    }
+  }
+  const scheduleRandomQuote =  async () =>{
+    if (randomQuoteEnabled){
+      const triggerTimes = [Math.random(), Math.random(), Math.random()]. map((value)=>
+        new Date(Date.now() + value * (1000 * 60 * 60 * 24))
+      );
+
+      for( let time of triggerTimes){
+        let quote = useQuote(true);
+        await Notifications.scheduleNotificationAsync({
+          content:{
+            title: quote.title,
+            body: quote.dailyLaw,
+          },
+          trigger: time,
+        });
+      }
+    } else{
+      await Notifications.cancelAllScheduledNotificationsAsync();
+    }
+  };
+  useEffect(()=> {
+    scheduleDailyQuote();
+  }, [dailyQuoteEnabled]);
+
+  useEffect(()=> {
+    scheduleRandomQuote();
+  }, [randomQuoteEnabled]);
 
   useEffect(() => {
     registerForPushNotificationsAsync().then(token => token && setExpoPushToken(token));
@@ -50,6 +99,7 @@ export default function App() {
         alignItems: 'center',
         justifyContent: 'space-around',
       }}>
+      
       <Text>Your expo push token: {expoPushToken}</Text>
       <Text>{`Channels: ${JSON.stringify(
         channels.map(c => c.id),
@@ -67,18 +117,28 @@ export default function App() {
           await schedulePushNotification();
         }}
       />
+        <View style ={{ flex:1, flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
+         
+       <Text> Daily Quote </Text>
+       <Switch value={dailyQuoteEnabled} onValueChange={setDailyQuoteEnabled} />
+       
+       <Text> Random Quote </Text>
+       <Switch value={randomQuoteEnabled} onValueChange={setRandomQuoteEnabled} />
+
+      </View>
     </View>
   );
 }
 
-async function schedulePushNotification() {
+export async function schedulePushNotification(secondss: number, wizdom?:Wizdom ) {
   await Notifications.scheduleNotificationAsync({
     content: {
-      title: "You've got mail! 📬",
-      body: 'Here is the notification body',
+      title: wizdom?wizdom.title: "You've got mail! 📬",
+      body: wizdom?wizdom.dailyLaw : 'Here is the notification body',
       data: { data: 'goes here', test: { test1: 'more data' } },
     },
-    trigger: { seconds: 2 },
+    trigger: { seconds: secondss },
+
   });
 }
 

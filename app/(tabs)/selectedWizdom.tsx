@@ -1,9 +1,9 @@
 
-import  useQuote, {monthIdx}  from '@/hooks/useQuote';
+import  useQuote, { monthIdx }  from '@/hooks/useQuote';
 import { useLocalSearchParams } from 'expo-router';
 import BlockView from '@/components/BlockView';
 
-export default function Home(){
+export default function selectedWizdom(){
   let month: string; let day: number; let date : Date = new Date();
   let params = useLocalSearchParams();
   if( Object.keys(params).length != 0){
@@ -14,9 +14,9 @@ export default function Home(){
     month = monthIdx[date.getMonth()];
     day = (date.getDate());
   }
+
   let wizdom = [];
   wizdom.push(useQuote( false, day, month ));
 
   return <BlockView wizdom={wizdom[0]}/>
-
 }
