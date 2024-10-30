@@ -1,25 +1,32 @@
-
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { StyleSheet, Image, Platform, Button, Pressable, Appearance } from 'react-native';
-import { Collapsible } from '@/components/Collapsible';
-import { ExternalLink } from '@/components/ExternalLink';
+import { StyleSheet, Pressable, Appearance } from 'react-native';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-import {data} from '@/constants/Data';
 import { Link } from 'expo-router';
-import { useTheme } from '@react-navigation/native';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { useState,useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 export default function TabTwoScreen() {
-
   const colorScheme = useColorScheme();
   const [theme, setTheme] = useState(colorScheme);
+ 
   useEffect(()=>{
-    Appearance.setColorScheme(theme);
-  },[theme])
+    const loadTheme = async () => {
+          if(theme == 'dark'){
+            Appearance.setColorScheme('dark');
+            await AsyncStorage.setItem('appTheme', 'dark');
+          }else{
+            Appearance.setColorScheme('light');
+            await AsyncStorage.setItem('appTheme', 'light');
+          }
+      }
+      loadTheme();
+      console.log("theme changed at explore");
+      Appearance.setColorScheme(theme);
+  }, [theme]);
 
   return (
     <ParallaxScrollView

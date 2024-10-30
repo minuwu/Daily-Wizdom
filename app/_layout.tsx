@@ -3,11 +3,11 @@ import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
-import 'react-native-reanimated';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Appearance } from 'react-native';
 import { useColorScheme } from '@/hooks/useColorScheme';
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
+
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
@@ -17,6 +17,13 @@ export default function RootLayout() {
   });
 
   useEffect(() => {
+    const loadTheme = async () => {
+      let prevTheme = await AsyncStorage.getItem('appTheme');
+      if (prevTheme ==='light') Appearance.setColorScheme('light');
+      if (prevTheme ==='dark') Appearance.setColorScheme('dark');
+      console.log("prev theme", prevTheme);
+    }
+    loadTheme();
     if (loaded) {
       SplashScreen.hideAsync();
     }

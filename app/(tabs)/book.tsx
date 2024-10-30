@@ -1,14 +1,7 @@
-
-import { Image, StyleSheet, Platform, Pressable, FlatList } from 'react-native';
-import { Link } from 'expo-router';
-import { HelloWave } from '@/components/HelloWave';
+import { FlatList } from 'react-native';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { data } from '@/constants/Data';
-import { styled } from 'nativewind';
-import { Wizdom } from '@/hooks/useQuote';
-import { memo } from 'react';
 import { Block } from '@/components/Block';
 
 const ITEM_HEIGHT = 92;
