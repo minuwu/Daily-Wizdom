@@ -15,13 +15,17 @@ export default function RootLayout() {
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
-
   useEffect(() => {
     const loadTheme = async () => {
-      let prevTheme = await AsyncStorage.getItem('appTheme');
-      if (prevTheme ==='light') Appearance.setColorScheme('light');
-      if (prevTheme ==='dark') Appearance.setColorScheme('dark');
-      console.log("prev theme", prevTheme);
+      try{
+        let prevTheme = await AsyncStorage.getItem('appTheme');
+        if (prevTheme ==='light') Appearance.setColorScheme('light');
+        if (prevTheme ==='dark') Appearance.setColorScheme('dark');
+        if (prevTheme == 'system') Appearance.setColorScheme(colorScheme);
+      }
+      catch(error){
+        console.log(error);
+      }
     }
     loadTheme();
     if (loaded) {

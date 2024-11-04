@@ -12,20 +12,34 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export default function TabTwoScreen() {
   const colorScheme = useColorScheme();
   const [theme, setTheme] = useState(colorScheme);
+  const [activeTheme, setActiveTheme] = useState('light');
  
   useEffect(()=>{
     const loadTheme = async () => {
+          try{
+            let activeTheme = await AsyncStorage.getItem('appTheme');
+            setActiveTheme(activeTheme || 'dark');
+          }catch(error){
+            console.log(error);
+          }
+
+          if(theme == null){
+            Appearance.setColorScheme(colorScheme);
+            setActiveTheme("system");
+            await AsyncStorage.setItem('appTheme', 'system');
+          }
           if(theme == 'dark'){
             Appearance.setColorScheme('dark');
+            setActiveTheme("dark");
             await AsyncStorage.setItem('appTheme', 'dark');
-          }else{
+          }
+          if(theme == 'light'){
             Appearance.setColorScheme('light');
+            setActiveTheme("light");
             await AsyncStorage.setItem('appTheme', 'light');
           }
       }
       loadTheme();
-      console.log("theme changed at explore");
-      Appearance.setColorScheme(theme);
   }, [theme]);
 
   return (
@@ -46,19 +60,20 @@ export default function TabTwoScreen() {
           <Pressable className="w-[30%] bg-slate-200 rounded-md border border-lg flex-col justify-center items-center dark:bg-gray-800 shadow-md shadow-black dark:shadow-white" onPress={()=>{setTheme('light')}}>
 
             <ThemedText>
-              <Ionicons name={theme=="light"? "sunny" : "sunny-outline"} className="px-4"/>
+              <Ionicons name={activeTheme =="light"? "sunny" : "sunny-outline"} className="px-4"/>
               LIGHT
             </ThemedText>
           </Pressable>
           <Pressable className="w-[30%] bg-slate-200 rounded-md border border-lg flex-col justify-center items-center dark:bg-gray-800 shadow-md shadow-black dark:shadow-white" onPress={()=>{setTheme(null)}}>
-            <ThemedText>
-              DEFAULT
+          <ThemedText>
+              <ThemedText className="text-bold">SYSTEM</ThemedText>
+              <Ionicons name={activeTheme == "system"? "sync-circle" : "sync-circle-outline"} style={{marginLeft: 4}}/>
             </ThemedText>
           </Pressable>
           <Pressable className="w-[30%] bg-slate-200 rounded-md border border-lg flex-col justify-center items-center dark:bg-gray-800 shadow-md shadow-black dark:shadow-white" onPress={()=>{setTheme('dark')}}>
             <ThemedText>
               <ThemedText className="text-bold">DARK</ThemedText>
-              <Ionicons name={theme=="dark"? "moon" : "moon-outline"} style={{marginLeft: 4}}/>
+              <Ionicons name={activeTheme =="dark"? "moon" : "moon-outline"} style={{marginLeft: 4}}/>
             </ThemedText>
           </Pressable>
          </ThemedView>
