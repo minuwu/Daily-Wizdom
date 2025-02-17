@@ -63,6 +63,26 @@ export default function TabTwoScreen() {
           </Pressable>
          </ThemedView>
       </ThemedView>
+
+      <ThemedView>
+        <ThemedText type="default" className="text-xl bold mt-2">Developed By</ThemedText>
+        <ThemedView className="flex flex-row justify-between my-4 h-8">
+          <Pressable className="w-[100%] bg-slate-200 rounded-md border border-lg flex-col justify-center items-center dark:bg-gray-800 shadow-md shadow-black dark:shadow-white" onPress={()=>{setTheme('light')}}>
+
+            <ThemedText>
+            <Ionicons name="logo-github" size={20}/> Mohammad Minhazul Abedin
+            </ThemedText>
+          </Pressable>
+         </ThemedView>
+      </ThemedView>
+      <ThemedView>
+       <ThemedText className='text-xl italic'>
+        About Section
+       </ThemedText>
+       <ThemedText>
+        This project intends to give a digital experience of the original book. This project upholds the very core flavor of visuals and taste.
+       </ThemedText>
+      </ThemedView>
     </ParallaxScrollView>
   );
 }

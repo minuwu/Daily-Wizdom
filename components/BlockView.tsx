@@ -7,7 +7,7 @@ import { SafeAreaView, ScrollView } from 'react-native';
 export default function BlockView({wizdom} : {wizdom: Wizdom}){
     return <SafeAreaView className="justify-center items-center">
       <ThemedView className="p-4 rounded text-center shadow-lg shadow-cyan-500/50">
-        <ThemedView className="mt-8 text-center">
+        <ThemedView className="text-center">
           <ThemedText type='default' className="text-center">
             {wizdom.month+" "+wizdom.date}  
           </ThemedText> 

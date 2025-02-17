@@ -11,7 +11,7 @@ let time = new Date();
 
 
 export const Block = memo( ({item}:{item: Wizdom}) => {
-    return <ThemedView className="active:bg-gray-500 bg-gray-100 dark:bg-gray-700 dark:text-white-100 rounded px-1 py-1 h-24 shadow-lg shadow-cyan-500/50 dark:shadow-lg rounded-lg">
+    return <ThemedView className="active:bg-gray-500 bg-gray-100 dark:bg-gray-800 dark:text-white-100 rounded px-1 py-1 h-24 shadow-lg shadow-cyan-500/50 dark:shadow-lg rounded-sm">
             <Link push asChild href={{
               pathname: './selectedWizdom',
               params: {

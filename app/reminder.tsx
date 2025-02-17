@@ -36,7 +36,9 @@ export default function App() {
           title: quote.title,
           body: quote.dailyLaw
         },
-        trigger
+        trigger: {
+          channelId: "default"
+        }
       });
     }else {
       Notifications.cancelAllScheduledNotificationsAsync();
@@ -55,7 +57,9 @@ export default function App() {
             title: quote.title,
             body: quote.dailyLaw,
           },
-          trigger: time,
+          trigger: {
+            channelId: "default"
+          }
         });
       }
     } else{
@@ -114,7 +118,7 @@ export default function App() {
       <Button
         title="Press to schedule a notification"
         onPress={async () => {
-          await schedulePushNotification();
+          await schedulePushNotification(5);
         }}
       />
         <View style ={{ flex:1, flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
@@ -137,7 +141,9 @@ export async function schedulePushNotification(secondss: number, wizdom?:Wizdom 
       body: wizdom?wizdom.dailyLaw : 'Here is the notification body',
       data: { data: 'goes here', test: { test1: 'more data' } },
     },
-    trigger: { seconds: secondss },
+    trigger: {
+      channelId: "default"
+    }
 
   });
 }

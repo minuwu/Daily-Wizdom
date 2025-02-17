@@ -16,6 +16,10 @@ export default function RootLayout() {
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
 
+  useEffect(() =>{
+    
+  }, [Appearance.getColorScheme()])
+
   useEffect(() => {
     const loadTheme = async () => {
       let prevTheme = await AsyncStorage.getItem('appTheme');
@@ -25,7 +29,10 @@ export default function RootLayout() {
     }
     loadTheme();
     if (loaded) {
-      SplashScreen.hideAsync();
+      setTimeout(()=>{
+        SplashScreen.hideAsync();
+      }, 1500);
+      
     }
   }, [loaded]);
 

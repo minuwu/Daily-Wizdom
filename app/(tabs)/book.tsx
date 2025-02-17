@@ -17,7 +17,7 @@ const getDayOfYear = (): number => {
 
 export default function TabOneScreen() {
 
-  return ( <ThemedView className="mt-4 mx-4 pt-8">
+  return ( <ThemedView className="mt-2 mx-2">
     
     {/* // <ParallaxScrollView
     //   headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
