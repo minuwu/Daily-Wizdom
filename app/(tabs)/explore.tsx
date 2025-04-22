@@ -82,7 +82,7 @@ export default function TabTwoScreen() {
       <ThemedView>
         <ThemedText type="default" className="text-xl bold mt-2">Developed By</ThemedText>
         <ThemedView className="flex flex-row justify-between my-4 h-8">
-          <Pressable className="w-[100%] bg-slate-200 rounded-md border border-lg flex-col justify-center items-center dark:bg-gray-800 shadow-md shadow-black dark:shadow-white" onPress={()=>{setTheme('light')}}>
+          <Pressable className="w-[100%] bg-slate-200 rounded-md border border-lg flex-col justify-center items-center dark:bg-gray-800 shadow-md shadow-black dark:shadow-white">
 
             <ThemedText>
             <Ionicons name="logo-github" size={20}/> Mohammad Minhazul Abedin
