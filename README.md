@@ -19,9 +19,12 @@ Daily-Wizdom is a cross-platform mobile application built on React Native. It de
 Download the pre-release version for 
 - Android: [daily-Wizdom.apk](https://github.com/minuwu/Daily-Wizdom/releases/download/pre-release/daily-Wizdom.apk)
 
-<div style="background-color: white; width: 100%; hight: 50px; padding: 10px; border-radius: 10px; align-items: center; justify-content: center; display: flex;">
-    <img src="https://github.com/minuwu/Daily-Wizdom/blob/main/assets/images/icon.png?raw=true" alt="Daily-Wizdom App Icon" width="100px" hight="50px" align="center" style="shadow: 1 1 2px"/>
+<div style="background-color: white; width: 100%; height: 75px; padding: 10px; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+    <img src="https://github.com/minuwu/Daily-Wizdom/blob/main/assets/images/icon.png?raw=true" alt="Daily-Wizdom App Icon" width="80px" height="80px" style="box-shadow: 3px 3px 5px rgba(5, 5, 7, 0.2); margin-right: 20px; border-radius: 80%;"/>
+    <>
+    <a href="https://github.com/minuwu/Daily-Wizdom/releases/download/pre-release/daily-Wizdom.apk" style="text-decoration: none; color: #0366d6; font-size: 1.5em; font-weight: bold;">Download for Android</a>
 </div>
+
 
 
 
