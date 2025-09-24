@@ -14,6 +14,18 @@ Daily-Wizdom is a cross-platform mobile application built on React Native. It de
 - Light, dark, and system theme support
 - Responsive design for mobile and web
 
+## More into the app
+
+<div align="center">
+
+![Daily-Wizdom-book2app](https://raw.githubusercontent.com/minuwu/Daily-Wizdom/refs/heads/main/gitAssets/book2app.png)
+
+![Daily-Wizdom-appicon](https://raw.githubusercontent.com/minuwu/Daily-Wizdom/refs/heads/main/gitAssets/book2icon.png)
+
+![Daily-Wizdom-notification](https://raw.githubusercontent.com/minuwu/Daily-Wizdom/refs/heads/main/gitAssets/notification.png)
+
+</div>
+
 ## Download
 
 Download the pre-release version for 
